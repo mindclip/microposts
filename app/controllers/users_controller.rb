@@ -17,6 +17,12 @@ class UsersController < ApplicationController
       render 'new'
     end
   end
+  
+  def destroy
+    @user = current_user.users.find_by(id: params[:id])
+    return redirect_to root_url if @user.nil?
+
+  end
 
   private
 
