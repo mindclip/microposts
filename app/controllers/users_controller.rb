@@ -22,12 +22,6 @@ class UsersController < ApplicationController
     end
   end
   
-<<<<<<< HEAD
-  def destroy
-    @user = current_user.users.find_by(id: params[:id])
-    return redirect_to root_url if @user.nil?
-
-=======
   def edit
     @user = User.find(params[:id])
   end
@@ -39,7 +33,6 @@ class UsersController < ApplicationController
     else
       render 'edit'
     end
->>>>>>> user-profile
   end
 
   private
