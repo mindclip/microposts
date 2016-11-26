@@ -1,7 +1,11 @@
 class UsersController < ApplicationController
+    before_action :logged_in_user, only: [:edit, :update]
+  before_action :correct_user,   only: [:edit, :update]
+
   
   def show # 追加
    @user = User.find(params[:id])
+   @microposts = @user.microposts.order(created_at: :desc)
   end
   
   def new
@@ -18,17 +22,44 @@ class UsersController < ApplicationController
     end
   end
   
+<<<<<<< HEAD
   def destroy
     @user = current_user.users.find_by(id: params[:id])
     return redirect_to root_url if @user.nil?
 
+=======
+  def edit
+    @user = User.find(params[:id])
+  end
+  
+  def update
+    if @user.update_attributes(user_params)
+      flash[:success] = "Profile updated"
+      redirect_to @user
+    else
+      render 'edit'
+    end
+>>>>>>> user-profile
   end
 
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :password,
+    params.require(:user).permit(:name, :email, :location, :age, :password,
                                  :password_confirmation)
   end
   
+  #ログイン済み確認
+  def logged_in_user
+      unless logged_in?
+        flash[:danger] = "Please log in."
+        redirect_to login_url
+      end
+  end
+
+    # 正しいユーザーかどうか確認
+  def correct_user
+      @user = User.find(params[:id])
+      redirect_to(root_url) unless current_user?(@user)
+  end
 end
