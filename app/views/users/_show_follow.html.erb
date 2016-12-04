@@ -11,13 +11,14 @@
 　  <section class="stats">
       <% if @users.any? %>
       　<div class="user_avatars">
-          <% @users.each do |user| %>
-          　<div class="row">
+        　<div class="row">
+            <% @users.each do |user| %>
           　   <div class="col-md-12">
-            　　<%= link_to gravatar_for(user, size: 80), user %>
+            　   <%= link_to gravatar_for(user, size: 80), user %>
+                <%= user.name %>
             　</div>
-            </div>
-          <% end %>
+            <% end %> 
+          </div>
         </div>
       <% end %>
 　  </section>
