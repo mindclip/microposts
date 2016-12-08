@@ -48,7 +48,6 @@ class UsersController < ApplicationController
     @users = @user.follower_users.page(params[:page])
   end
 
-
   private
 
   def user_params
